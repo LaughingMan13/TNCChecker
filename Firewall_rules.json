@@ -1,0 +1,82 @@
+{
+    "servers": [
+      
+      {
+        "Hostname": "SQLServer1",
+        "IPAddress": "192.168.0.10",
+        "Description": "Example SQL Server1"
+      },
+      {
+        "Hostname": "SQLServer2",
+        "IPAddress": "192.168.0.11",
+        "Description": "Example Server2"
+      },
+      {
+        "Hostname": "HomeServer1",
+        "IPAddress": "192.168.0.5",
+        "Description": "Example HomeServer1"
+      },
+      {
+        "Hostname": "FileStoreServer1",
+        "IPAddress": "192.168.0.5",
+        "Description": "Example FileStoreServer1"
+      },
+
+      {
+        "Hostname": "HomePC1",
+        "IPAddress": "192.168.0.20",
+        "Description": "Example HomePC1"
+      },
+      {
+        "Hostname": "HomePC2",
+        "IPAddress": "192.168.0.21",
+        "Description": "Example HomePC2"
+      },
+      {
+        "Hostname": "GuestDevice1",
+        "IPAddress": "192.168.1.30",
+        "Description": "Example GuestDevice1"
+      }
+
+    ],
+    "rules": [
+      {
+        "Sources": ["HomePC1", "HomePC2"],
+        "Destinations": [
+          {
+            "Hostnames": ["SQLServer1", "SQLServer2"],
+            "Ports": [1433],
+            "Description": "HomePC to SQL Database connectivity"
+          },
+          {
+            "Hostnames": ["HomeServer1", "SQLServer1", "SQLServer2"],
+            "Ports": [3389],
+            "Description": "HomePC to HomeServers RDP Access"
+          },
+          {
+            "Hostnames": ["HomeServer1"],
+            "Ports": [443],
+            "Description": "HomePC HTTPS web access to HomeServer"
+          }
+        ]
+      },    
+
+      {
+        "Sources": ["HomeServer1"],
+        "Destinations": [
+          {
+            "Hostnames": ["SQLServer1", "SQLServer2"],
+            "Ports": [1433],
+            "Description": "HomeServer SQL server access"
+          },
+          {
+            "Hostnames": ["FileStoreServer1"],
+            "Ports": [25],
+            "Description": "HomeServer SMTP to FileStoreServer1"
+          }
+        ]
+      }
+
+    ]
+  }
+  
